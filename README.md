@@ -5,26 +5,31 @@ AWS 관리콘솔 접속
 IAM 서비스의 ‘사용자’ 메뉴 접속
 사용자의 Access Key와 Secret Access Key 복사
 #### Cloud IDE - AWS Client Config
+```
 aws configure 
 Input Access Key 
 Input Secret Access Key
 Input your Region Code 
 Input 'json' in Output format 
+```
 #### EKS (Elastic Kubernetes Service) 생성
-
+```
 eksctl create cluster --name (Cluster-Name) --version 1.17 --nodegroup-name standard-workers --node-type t3.medium --nodes 2 --nodes-min 1 --nodes-max 2
+```
 #### K8s Client 에 target EKS Context 설정
-
+```
 aws eks --region (Region-Code) update-kubeconfig --name (Cluster-Name)
 kubectl get all
 kubectl config current-context
+```
 #### AWS ECR Login 설정
-
+```
 docker login --username AWS -p $(aws ecr get-login-password --region (Region-Code)) (Account-Id).dkr.ecr.(Region-Code).amazonaws.com/
+```
 #### AWS ECR에 Image Repository 생성
-
+```
 aws ecr create-repository --repository-name (Image-Repository-Name) --image
-
+```
 # 도커 이미지 무작정 따라하기
 #### 이미지 기반 컨테이너 생성
 ```
@@ -67,9 +72,10 @@ Cloud IDE 메뉴 > File > New File > Dockfile (확장자 없음)
 ```
 입력 후, 저장
 이미지 빌드하기
-
+```
     docker build -t apexacme/welcome:v1 .
     docker image ls
+```    
 이미지 원격 저장소에 푸시하기
 
 도커허브 계정 생성
